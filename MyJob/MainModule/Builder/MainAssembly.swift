@@ -13,7 +13,7 @@ protocol ModuleBuilderProtocol {
 
 final class ModuleBuilder: ModuleBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController {
-        let view = MainViewController()
+        let view = JobsViewController()
         let networkService = NetworkService()
         let presenter = MainPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter

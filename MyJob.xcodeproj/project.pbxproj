@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		E774F2382AF0388E00C81D9F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F2372AF0388E00C81D9F /* Router.swift */; };
+		E774F23A2AF0451700C81D9F /* JobsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F2392AF0451700C81D9F /* JobsModel.swift */; };
 		E7F547FF2AF02B7100238748 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F547FE2AF02B7100238748 /* AppDelegate.swift */; };
 		E7F548012AF02B7100238748 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F548002AF02B7100238748 /* SceneDelegate.swift */; };
-		E7F548032AF02B7100238748 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F548022AF02B7100238748 /* MainViewController.swift */; };
+		E7F548032AF02B7100238748 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F548022AF02B7100238748 /* JobsViewController.swift */; };
 		E7F548082AF02B7300238748 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7F548072AF02B7300238748 /* Assets.xcassets */; };
 		E7F5480B2AF02B7300238748 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F548092AF02B7300238748 /* LaunchScreen.storyboard */; };
 		E7F5481A2AF0321C00238748 /* MainAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F548192AF0321C00238748 /* MainAssembly.swift */; };
@@ -20,10 +21,11 @@
 
 /* Begin PBXFileReference section */
 		E774F2372AF0388E00C81D9F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		E774F2392AF0451700C81D9F /* JobsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsModel.swift; sourceTree = "<group>"; };
 		E7F547FB2AF02B7100238748 /* MyJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F547FE2AF02B7100238748 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7F548002AF02B7100238748 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E7F548022AF02B7100238748 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		E7F548022AF02B7100238748 /* JobsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsViewController.swift; sourceTree = "<group>"; };
 		E7F548072AF02B7300238748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7F5480A2AF02B7300238748 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7F5480C2AF02B7300238748 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				E7F548122AF02C1300238748 /* Application */,
 				E7F5481B2AF036FD00238748 /* NetworkService */,
 				E774F2362AF0387F00C81D9F /* Router */,
+				E7F548162AF031EF00238748 /* Model */,
 				E7F548142AF031D300238748 /* MainModule */,
 				E7F548132AF02C2100238748 /* Resources */,
 			);
@@ -102,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				E7F548152AF031E900238748 /* Builder */,
-				E7F548162AF031EF00238748 /* Model */,
 				E7F548172AF031F600238748 /* View */,
 				E7F548182AF031FC00238748 /* Presenter */,
 			);
@@ -120,6 +122,7 @@
 		E7F548162AF031EF00238748 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E774F2392AF0451700C81D9F /* JobsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -127,7 +130,7 @@
 		E7F548172AF031F600238748 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E7F548022AF02B7100238748 /* MainViewController.swift */,
+				E7F548022AF02B7100238748 /* JobsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -219,8 +222,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7F5481D2AF0370C00238748 /* NetworkService.swift in Sources */,
+				E774F23A2AF0451700C81D9F /* JobsModel.swift in Sources */,
 				E7F5481F2AF0374000238748 /* MainPresenter.swift in Sources */,
-				E7F548032AF02B7100238748 /* MainViewController.swift in Sources */,
+				E7F548032AF02B7100238748 /* JobsViewController.swift in Sources */,
 				E774F2382AF0388E00C81D9F /* Router.swift in Sources */,
 				E7F5481A2AF0321C00238748 /* MainAssembly.swift in Sources */,
 				E7F547FF2AF02B7100238748 /* AppDelegate.swift in Sources */,

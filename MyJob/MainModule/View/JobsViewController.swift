@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  JobsViewController.swift
 //  MyJob
 //
 //  Created by Philipp Zeppelin on 30.10.2023.
@@ -7,18 +7,18 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class JobsViewController: UIViewController {
     var presenter: MainPresenterProtocol?
 
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = .systemGreen
     }
 }
 
 // MARK: - MainViewProtocol
-extension MainViewController: MainViewProtocol {
+extension JobsViewController: MainViewProtocol {
     func success() {}
     func error(error: Error) {}
 }
