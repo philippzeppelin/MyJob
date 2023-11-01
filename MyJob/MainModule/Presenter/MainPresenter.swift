@@ -27,7 +27,4 @@ final class MainPresenter: MainPresenterProtocol {
         self.networkService = networkService
         self.router = router
     }
-
-//    func configure(cell: JobCell, at index: Int)
-//    func bookButtonTapped(at index: Int)
 }

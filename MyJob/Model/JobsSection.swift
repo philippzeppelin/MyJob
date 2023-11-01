@@ -20,6 +20,4 @@ enum JobsSection {
     public var count: Int {
         jobs.count
     }
-
-    
 }

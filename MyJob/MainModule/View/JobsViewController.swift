@@ -31,7 +31,6 @@ class JobsViewController: UIViewController {
         setupDelegates()
         view.backgroundColor = .systemBackground
     }
-    // TODO: Сделать кастомные ячейки
 
     private func setupDelegates() {
         collectionView.dataSource = self
@@ -45,15 +44,15 @@ class JobsViewController: UIViewController {
         )
 
         item.contentInsets = NSDirectionalEdgeInsets(
-            top: 10,
-            leading: 10,
-            bottom: 10,
-            trailing: 10
+            top: 15,
+            leading: 15,
+            bottom: 0,
+            trailing: 15
         )
 
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: .init(widthDimension: .fractionalWidth(1),
-                              heightDimension: .fractionalHeight(0.2)),
+                              heightDimension: .absolute(125)),
             subitems: [item]
         )
 
@@ -61,8 +60,6 @@ class JobsViewController: UIViewController {
 
         return section
     }
-
-
 }
 
 // MARK: - UICollectionViewDataSource
@@ -80,7 +77,6 @@ extension JobsViewController: UICollectionViewDataSource {
         }
 
         cell.configureCell()
-//        cell.backgroundColor = .red
         return cell
     }
 }
@@ -108,7 +104,3 @@ private extension JobsViewController {
         ])
     }
 }
-
-// TODO: Сделать кастомные ячейки
-// TODO: Сделать корректный размер ячеек
-// TODO: Сделать Network Service
