@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		E774F2382AF0388E00C81D9F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F2372AF0388E00C81D9F /* Router.swift */; };
 		E774F23A2AF0451700C81D9F /* JobsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F2392AF0451700C81D9F /* JobsModel.swift */; };
+		E774F23C2AF17B4B00C81D9F /* JobsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F23B2AF17B4B00C81D9F /* JobsSection.swift */; };
+		E774F23E2AF1857600C81D9F /* JobCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F23D2AF1857600C81D9F /* JobCell.swift */; };
+		E774F2422AF2D95600C81D9F /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F2412AF2D95600C81D9F /* Resources.swift */; };
+		E774F2442AF2D96900C81D9F /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F2432AF2D96900C81D9F /* UIColor + Extensions.swift */; };
 		E7F547FF2AF02B7100238748 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F547FE2AF02B7100238748 /* AppDelegate.swift */; };
 		E7F548012AF02B7100238748 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F548002AF02B7100238748 /* SceneDelegate.swift */; };
 		E7F548032AF02B7100238748 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F548022AF02B7100238748 /* JobsViewController.swift */; };
@@ -22,6 +26,10 @@
 /* Begin PBXFileReference section */
 		E774F2372AF0388E00C81D9F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		E774F2392AF0451700C81D9F /* JobsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsModel.swift; sourceTree = "<group>"; };
+		E774F23B2AF17B4B00C81D9F /* JobsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsSection.swift; sourceTree = "<group>"; };
+		E774F23D2AF1857600C81D9F /* JobCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCell.swift; sourceTree = "<group>"; };
+		E774F2412AF2D95600C81D9F /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		E774F2432AF2D96900C81D9F /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
 		E7F547FB2AF02B7100238748 /* MyJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F547FE2AF02B7100238748 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7F548002AF02B7100238748 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +61,23 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		E774F23F2AF2D93B00C81D9F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E774F2402AF2D94800C81D9F /* UIKit */,
+				E774F2412AF2D95600C81D9F /* Resources.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E774F2402AF2D94800C81D9F /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				E774F2432AF2D96900C81D9F /* UIColor + Extensions.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		E7F547F22AF02B7100238748 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +102,7 @@
 				E774F2362AF0387F00C81D9F /* Router */,
 				E7F548162AF031EF00238748 /* Model */,
 				E7F548142AF031D300238748 /* MainModule */,
+				E774F23F2AF2D93B00C81D9F /* Helpers */,
 				E7F548132AF02C2100238748 /* Resources */,
 			);
 			path = MyJob;
@@ -123,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				E774F2392AF0451700C81D9F /* JobsModel.swift */,
+				E774F23B2AF17B4B00C81D9F /* JobsSection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -131,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				E7F548022AF02B7100238748 /* JobsViewController.swift */,
+				E774F23D2AF1857600C81D9F /* JobCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -221,12 +249,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E774F23C2AF17B4B00C81D9F /* JobsSection.swift in Sources */,
+				E774F23E2AF1857600C81D9F /* JobCell.swift in Sources */,
 				E7F5481D2AF0370C00238748 /* NetworkService.swift in Sources */,
 				E774F23A2AF0451700C81D9F /* JobsModel.swift in Sources */,
 				E7F5481F2AF0374000238748 /* MainPresenter.swift in Sources */,
 				E7F548032AF02B7100238748 /* JobsViewController.swift in Sources */,
 				E774F2382AF0388E00C81D9F /* Router.swift in Sources */,
 				E7F5481A2AF0321C00238748 /* MainAssembly.swift in Sources */,
+				E774F2422AF2D95600C81D9F /* Resources.swift in Sources */,
+				E774F2442AF2D96900C81D9F /* UIColor + Extensions.swift in Sources */,
 				E7F547FF2AF02B7100238748 /* AppDelegate.swift in Sources */,
 				E7F548012AF02B7100238748 /* SceneDelegate.swift in Sources */,
 			);
@@ -298,7 +330,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -355,7 +387,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
