@@ -44,15 +44,15 @@ class JobsViewController: UIViewController {
         )
 
         item.contentInsets = NSDirectionalEdgeInsets(
-            top: 15,
-            leading: 15,
+            top: Constants.cellInsets,
+            leading: Constants.cellInsets,
             bottom: 0,
-            trailing: 15
+            trailing: Constants.cellInsets
         )
 
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: .init(widthDimension: .fractionalWidth(1),
-                              heightDimension: .absolute(125)),
+                              heightDimension: .absolute(Constants.cellHeigth)),
             subitems: [item]
         )
 
@@ -102,5 +102,12 @@ private extension JobsViewController {
             collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+}
+
+extension JobsViewController {
+    private enum Constants {
+        static let cellInsets: CGFloat = 15
+        static let cellHeigth: CGFloat = 125
     }
 }
