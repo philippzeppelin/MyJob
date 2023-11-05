@@ -31,14 +31,13 @@ final class JobCell: UICollectionViewCell {
 
     private let jobNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Грузчик"
+        label.font = Resources.Fonts.arialBold17
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private let earningsLabel: UILabel = {
         let label = UILabel()
-        label.text = "1 600 Р"
         label.textAlignment = .center
         label.layer.cornerRadius = Constants.labelsBackgroundCornerRadius
         label.layer.backgroundColor = UIColor(hexString: "F7CE17").cgColor
@@ -51,21 +50,19 @@ final class JobCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = Constants.companyLogoDiameter / 2
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .red
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
-    private let companyNameLabel: UILabel = { // Font
+    private let companyNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Озон"
+        label.font = Resources.Fonts.arialBold13
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     private let jobStartingDateLabel: UILabel = {
         let label = UILabel()
-        label.text = "13.10"
         label.textAlignment = .center
         label.layer.cornerRadius = Constants.labelsBackgroundCornerRadius
         label.layer.backgroundColor = UIColor.systemGray4.cgColor
@@ -75,7 +72,6 @@ final class JobCell: UICollectionViewCell {
 
     private let jobStartingTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "18:00"
         label.textAlignment = .center
         label.layer.cornerRadius = Constants.labelsBackgroundCornerRadius
         label.layer.backgroundColor = UIColor.systemGray4.cgColor
@@ -120,6 +116,62 @@ final class JobCell: UICollectionViewCell {
                                         y: centerY))
 
         dividerLayer.path = dividerPath.cgPath
+    }
+}
+
+extension JobCell {
+    struct Configuration {
+        let profession: String
+        let date: String
+        let salary: Double
+        let id: String
+        let logo: URL?
+        let employer: String
+    }
+
+    func configureCell(_ configuration: Configuration) {
+        jobNameLabel.text = configuration.profession
+        earningsLabel.text = String(configuration.salary)
+        companyNameLabel.text = configuration.employer
+
+        if let formattedDateAndTime = formatDateTime(configuration.date) {
+              jobStartingDateLabel.text = formattedDateAndTime.date
+              jobStartingTimeLabel.text = formattedDateAndTime.time
+          } else {
+              jobStartingDateLabel.text = "N/A"
+              jobStartingTimeLabel.text = "N/A"
+          }
+
+        if let logoUrl = configuration.logo {
+            DispatchQueue.global().async {
+                if let imageData = try? Data(contentsOf: logoUrl) {
+                    if let image = UIImage(data: imageData) {
+                        DispatchQueue.main.async {
+                            self.companyLogoImageView.image = image
+                        }
+                    }
+                }
+            }
+        } else {
+            companyLogoImageView.image = UIImage(systemName: "gear")
+        }
+    }
+
+    func formatDateTime(_ dateTimeString: String) -> (date: String, time: String)? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+
+        if let date = dateFormatter.date(from: dateTimeString) {
+            dateFormatter.dateFormat = "dd.MM"
+            let formattedDate = dateFormatter.string(from: date)
+
+            dateFormatter.dateFormat = "H:mm"
+            let formattedTime = dateFormatter.string(from: date)
+
+            return (date: formattedDate, time: formattedTime)
+        }
+
+        return (date: "N/A", time: "N/A")
     }
 }
 

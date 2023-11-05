@@ -8,11 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		E774F2382AF0388E00C81D9F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F2372AF0388E00C81D9F /* Router.swift */; };
+<<<<<<< HEAD
 		E774F23A2AF0451700C81D9F /* JobsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F2392AF0451700C81D9F /* JobsModel.swift */; };
 		E774F23C2AF17B4B00C81D9F /* JobsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F23B2AF17B4B00C81D9F /* JobsSection.swift */; };
 		E774F23E2AF1857600C81D9F /* JobCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F23D2AF1857600C81D9F /* JobCell.swift */; };
 		E774F2422AF2D95600C81D9F /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F2412AF2D95600C81D9F /* Resources.swift */; };
 		E774F2442AF2D96900C81D9F /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F2432AF2D96900C81D9F /* UIColor + Extensions.swift */; };
+=======
+		E774F23A2AF0451700C81D9F /* JobsModelApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F2392AF0451700C81D9F /* JobsModelApi.swift */; };
+		E774F24E2AF4351100C81D9F /* ErrorResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774F24D2AF4351100C81D9F /* ErrorResponce.swift */; };
+>>>>>>> 20db96c (Set fetching data into ui elements)
 		E7F547FF2AF02B7100238748 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F547FE2AF02B7100238748 /* AppDelegate.swift */; };
 		E7F548012AF02B7100238748 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F548002AF02B7100238748 /* SceneDelegate.swift */; };
 		E7F548032AF02B7100238748 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F548022AF02B7100238748 /* JobsViewController.swift */; };
@@ -25,11 +30,16 @@
 
 /* Begin PBXFileReference section */
 		E774F2372AF0388E00C81D9F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		E774F2392AF0451700C81D9F /* JobsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsModel.swift; sourceTree = "<group>"; };
 		E774F23B2AF17B4B00C81D9F /* JobsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsSection.swift; sourceTree = "<group>"; };
 		E774F23D2AF1857600C81D9F /* JobCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCell.swift; sourceTree = "<group>"; };
 		E774F2412AF2D95600C81D9F /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		E774F2432AF2D96900C81D9F /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
+=======
+		E774F2392AF0451700C81D9F /* JobsModelApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsModelApi.swift; sourceTree = "<group>"; };
+		E774F24D2AF4351100C81D9F /* ErrorResponce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponce.swift; sourceTree = "<group>"; };
+>>>>>>> 20db96c (Set fetching data into ui elements)
 		E7F547FB2AF02B7100238748 /* MyJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F547FE2AF02B7100238748 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7F548002AF02B7100238748 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +71,7 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		E774F23F2AF2D93B00C81D9F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +89,8 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
+=======
+>>>>>>> 20db96c (Set fetching data into ui elements)
 		E7F547F22AF02B7100238748 = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				E7F5481C2AF0370C00238748 /* NetworkService.swift */,
+				E774F24D2AF4351100C81D9F /* ErrorResponce.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -249,18 +263,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				E774F23C2AF17B4B00C81D9F /* JobsSection.swift in Sources */,
 				E774F23E2AF1857600C81D9F /* JobCell.swift in Sources */,
 				E7F5481D2AF0370C00238748 /* NetworkService.swift in Sources */,
 				E774F23A2AF0451700C81D9F /* JobsModel.swift in Sources */,
 				E7F5481F2AF0374000238748 /* MainPresenter.swift in Sources */,
 				E7F548032AF02B7100238748 /* JobsViewController.swift in Sources */,
+=======
+				E7F5481D2AF0370C00238748 /* NetworkService.swift in Sources */,
+				E774F23A2AF0451700C81D9F /* JobsModelApi.swift in Sources */,
+				E7F587D32AF5696600D6ECCA /* Resources.swift in Sources */,
+				E7F5481F2AF0374000238748 /* JobPresenter.swift in Sources */,
+				E7F587CD2AF5683000D6ECCA /* JobCell.swift in Sources */,
+>>>>>>> 20db96c (Set fetching data into ui elements)
 				E774F2382AF0388E00C81D9F /* Router.swift in Sources */,
 				E7F5481A2AF0321C00238748 /* MainAssembly.swift in Sources */,
 				E774F2422AF2D95600C81D9F /* Resources.swift in Sources */,
 				E774F2442AF2D96900C81D9F /* UIColor + Extensions.swift in Sources */,
 				E7F547FF2AF02B7100238748 /* AppDelegate.swift in Sources */,
 				E7F548012AF02B7100238748 /* SceneDelegate.swift in Sources */,
+<<<<<<< HEAD
+=======
+				E774F24E2AF4351100C81D9F /* ErrorResponce.swift in Sources */,
+				E7F587D52AF7B97100D6ECCA /* JobsModel.swift in Sources */,
+>>>>>>> 20db96c (Set fetching data into ui elements)
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

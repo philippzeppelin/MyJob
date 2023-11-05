@@ -65,7 +65,12 @@ class JobsViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 extension JobsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+<<<<<<< HEAD
         return 30
+=======
+        guard let jobsCount = presenter?.jobs.count else { return 0 }
+        return jobsCount
+>>>>>>> 20db96c (Set fetching data into ui elements)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -76,7 +81,21 @@ extension JobsViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
 
+<<<<<<< HEAD
         cell.configureCell()
+=======
+        if let job = presenter?.jobs[indexPath.row] {
+            cell.configureCell(.init(
+                profession: job.profession,
+                date: job.date,
+                salary: job.salary,
+                id: job.id,
+                logo: job.logo,
+                employer: job.employer)
+            )
+        }
+
+>>>>>>> 20db96c (Set fetching data into ui elements)
         return cell
     }
 }
@@ -86,8 +105,25 @@ extension JobsViewController: UICollectionViewDelegate {}
 
 // MARK: - MainViewProtocol
 extension JobsViewController: MainViewProtocol {
+<<<<<<< HEAD
     func success() {}
     func error(error: Error) {}
+=======
+    func success() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    func failure(error: Error) {
+        print(error.localizedDescription)
+    }
+}
+
+extension JobsViewController {
+    private func setupAppearence() {
+        view.backgroundColor = .systemBackground
+    }
+>>>>>>> 20db96c (Set fetching data into ui elements)
 }
 
 private extension JobsViewController {
