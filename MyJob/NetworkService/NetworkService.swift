@@ -8,20 +8,14 @@
 import Foundation
 
 protocol NetworkServiceProtocol {
-    func getJobs(page: Int, completion: @escaping (Result<JobsModel, ErrorResponce>) -> Void)
+    func fetchJobs(from url: URL, completion: @escaping (Result<[JobsModelApi], ErrorResponce>) -> Void)
 }
 
 final class NetworkService: NetworkServiceProtocol {
     private var task: URLSessionDataTask?
-
-    func getJobs(page: Int, completion: @escaping (Result<JobsModel, ErrorResponce>) -> Void) {
-        let baseUrl = "http://185.174.137.159/jobs"
-
-        guard let url = URL(string: baseUrl) else { return }
-
-        var request = URLRequest(url: url)
-
-        task = URLSession.shared.dataTask(with: request) { data, response, error in
+    
+    func fetchJobs(from url: URL, completion: @escaping (Result<[JobsModelApi], ErrorResponce>) -> Void) {
+        task = URLSession.shared.dataTask(with: url) { data, response, error in
             if error != nil {
                 completion(.failure(.apiError))
                 return
@@ -40,8 +34,8 @@ final class NetworkService: NetworkServiceProtocol {
 
             do {
                 let decoder = JSONDecoder()
-                let decodedData = try decoder.decode(JobsModel.self, from: data)
-                completion(.success(decodedData))
+                let jobsModelApi = try decoder.decode([JobsModelApi].self, from: data)
+                completion(.success(jobsModelApi))
             } catch {
                 completion(.failure(.noData))
             }

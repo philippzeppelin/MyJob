@@ -6,15 +6,17 @@
 //
 
 import Foundation
-
-struct JobRequest: DataRequestProtocol {
-    typealias Response = JobsModel
-
-    var body: String = "http://185.174.137.159/"
-    var path: String = "jobs"
-    var method: HTTPMethod = .get
-
-    public var url: String {
-        return body + path
-    }
-}
+//
+//struct JobRequest: DataRequestProtocol {
+//    func decode(_ data: Data) throws -> JobsModel {}
+//    
+//    typealias Response = JobsModel
+//
+//    var body: String = "http://185.174.137.159/"
+//    var path: String = "jobs"
+//    var method: HTTPMethod = .get
+//
+//    public var url: String {
+//        return body + path
+//    }
+//}
