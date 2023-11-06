@@ -7,13 +7,27 @@
 
 import Foundation
 
-struct JobsModel {
+struct JobsModel: Hashable {
     let id: String
     let logo: URL?
     let profession: String
     let employer: String
     let salary: Double
     let date: String
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(profession)
+        hasher.combine(date)
+        hasher.combine(salary)
+        hasher.combine(id)
+        hasher.combine(logo)
+        hasher.combine(employer)
+    }
+
+    // Check for equality
+    static func == (lhs: JobsModel, rhs: JobsModel) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 extension JobsModel {
