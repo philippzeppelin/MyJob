@@ -1,5 +1,5 @@
 //
-//  JobsViewController.swift
+//  JobViewController.swift
 //  MyJob
 //
 //  Created by Philipp Zeppelin on 30.10.2023.
@@ -7,9 +7,14 @@
 
 import UIKit
 
-final class JobsViewController: UIViewController {
+final class JobViewController: UIViewController {
+    private enum Section {
+        case main
+    }
+
     var presenter: MainPresenterProtocol?
-    var jobsCollectionView: UICollectionView?
+    private var jobsCollectionView: UICollectionView?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, JobsModel>?
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout { section, _ in
@@ -26,16 +31,15 @@ final class JobsViewController: UIViewController {
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.fetchJobs()
-
+        fetchingDataToVC()
         setupAppearence()
         setupDelegates()
         embedView()
         setupConstraints()
+        configureDataSource()
     }
 
     private func setupDelegates() {
-        collectionView.dataSource = self
         collectionView.delegate = self
     }
 
@@ -62,61 +66,55 @@ final class JobsViewController: UIViewController {
 
         return section
     }
-}
 
-// MARK: - UICollectionViewDataSource
-extension JobsViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let jobsCount = presenter?.jobs.count else { return 0 }
-
-        return jobsCount
+    private func fetchingDataToVC() {
+        presenter?.fetchJobs()
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: JobCell.cellIdentifier,
-            for: indexPath
-        ) as? JobCell else {
-            return UICollectionViewCell()
-        }
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, JobsModel>(collectionView: collectionView) {
+            (collectionView, indexPath, job) -> UICollectionViewCell? in
+            if let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: JobCell.cellIdentifier,
+                for: indexPath
+            ) as? JobCell {
+                cell.configureCell(JobCell.Configuration(job: job, logoURL: job.logo))
 
-        if let job = presenter?.jobs[indexPath.row] {
-            cell.configureCell(.init(
-                profession: job.profession,
-                date: job.date,
-                salary: job.salary,
-                id: job.id,
-                logo: job.logo,
-                employer: job.employer)
-            )
+                return cell
+            }
+            return nil
         }
-
-        return cell
     }
 }
 
 // MARK: - UICollectionViewDelegate
-extension JobsViewController: UICollectionViewDelegate {}
+extension JobViewController: UICollectionViewDelegate {}
 
 // MARK: - MainViewProtocol
-extension JobsViewController: MainViewProtocol {
+extension JobViewController: MainViewProtocol {
     func success() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
+        if let jobs = presenter?.jobs {
+            var snapshot = NSDiffableDataSourceSnapshot<Section, JobsModel>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(jobs, toSection: .main)
+            dataSource?.apply(snapshot, animatingDifferences: true)
         }
     }
+
     func failure(error: Error) {
         print(error.localizedDescription)
     }
 }
 
-extension JobsViewController {
+// MARK: - Setup View's Appearence
+extension JobViewController {
     private func setupAppearence() {
         view.backgroundColor = .systemBackground
     }
 }
 
-private extension JobsViewController {
+// MARK: - Setup View and Constraints
+private extension JobViewController {
     func embedView() {
         view.addSubview(collectionView)
     }
@@ -131,7 +129,8 @@ private extension JobsViewController {
     }
 }
 
-extension JobsViewController {
+// MARK: - Constants
+extension JobViewController {
     private enum Constants {
         static let cellInsets: CGFloat = 15
         static let cellHeigth: CGFloat = 125

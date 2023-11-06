@@ -56,7 +56,7 @@ final class JobCell: UICollectionViewCell {
 
     private let companyNameLabel: UILabel = {
         let label = UILabel()
-        label.font = Resources.Fonts.arialBold13
+        label.font = Resources.Fonts.arialBold14
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -64,6 +64,7 @@ final class JobCell: UICollectionViewCell {
     private let jobStartingDateLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = Resources.Fonts.arial16
         label.layer.cornerRadius = Constants.labelsBackgroundCornerRadius
         label.layer.backgroundColor = UIColor.systemGray4.cgColor
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -73,6 +74,7 @@ final class JobCell: UICollectionViewCell {
     private let jobStartingTimeLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = Resources.Fonts.arial16
         label.layer.cornerRadius = Constants.labelsBackgroundCornerRadius
         label.layer.backgroundColor = UIColor.systemGray4.cgColor
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -119,43 +121,42 @@ final class JobCell: UICollectionViewCell {
     }
 }
 
+// MARK: - Configuration
 extension JobCell {
     struct Configuration {
-        let profession: String
-        let date: String
-        let salary: Double
-        let id: String
-        let logo: URL?
-        let employer: String
+        let job: JobsModel
+        let logoURL: URL?
     }
 
     func configureCell(_ configuration: Configuration) {
-        jobNameLabel.text = configuration.profession
-        earningsLabel.text = String(configuration.salary)
-        companyNameLabel.text = configuration.employer
+            let job = configuration.job
+            jobNameLabel.text = job.profession
+            earningsLabel.text = "\(Int(job.salary)) ₽"
+            companyNameLabel.text = job.employer
 
-        if let formattedDateAndTime = formatDateTime(configuration.date) {
-              jobStartingDateLabel.text = formattedDateAndTime.date
-              jobStartingTimeLabel.text = formattedDateAndTime.time
-          } else {
-              jobStartingDateLabel.text = "N/A"
-              jobStartingTimeLabel.text = "N/A"
-          }
+            if let formattedDateAndTime = formatDateTime(job.date) {
+                jobStartingDateLabel.text = formattedDateAndTime.date
+                jobStartingTimeLabel.text = formattedDateAndTime.time
+            } else {
+                jobStartingDateLabel.text = "N/A"
+                jobStartingTimeLabel.text = "N/A"
+            }
 
-        if let logoUrl = configuration.logo {
-            DispatchQueue.global().async {
-                if let imageData = try? Data(contentsOf: logoUrl) {
-                    if let image = UIImage(data: imageData) {
+            if let logoURL = configuration.logoURL {
+                let task = URLSession.shared.dataTask(with: logoURL) { (data, _, error) in
+                    if let data = data, let image = UIImage(data: data) {
                         DispatchQueue.main.async {
                             self.companyLogoImageView.image = image
                         }
+                    } else {
+                        print("Error loading image: \(error?.localizedDescription ?? "Unknown error")")
                     }
                 }
+                task.resume()
+            } else {
+                companyLogoImageView.image = UIImage(systemName: "gear")
             }
-        } else {
-            companyLogoImageView.image = UIImage(systemName: "gear")
         }
-    }
 
     func formatDateTime(_ dateTimeString: String) -> (date: String, time: String)? {
         let dateFormatter = DateFormatter()
@@ -270,6 +271,7 @@ private extension JobCell {
     }
 }
 
+// MARK: - Constants
 extension JobCell {
     private enum Constants {
         static let labelsBackgroundCornerRadius: CGFloat = 5

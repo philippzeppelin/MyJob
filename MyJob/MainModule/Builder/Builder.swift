@@ -13,9 +13,9 @@ protocol ModuleBuilderProtocol {
 
 final class ModuleBuilder: ModuleBuilderProtocol {
     func createMainModule(router: RouterProtocol) -> UIViewController {
-        let view = JobsViewController()
+        let view = JobViewController()
         let networkService = NetworkService()
-        let presenter = MainPresenter(view: view, networkService: networkService, router: router)
+        let presenter = JobPresenter(view: view, networkService: networkService, router: router)
         view.presenter = presenter
         return view
     }

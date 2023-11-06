@@ -15,8 +15,10 @@ enum Resources {
     }
 
     enum Fonts {
-        static let arialBold13 = UIFont(name: "Arial Bold", size: 13)
+        static let arialBold14 = UIFont(name: "Arial Bold", size: 14)
         static let arialBold17 = UIFont(name: "Arial Bold", size: 17)
+        static let arial16 = UIFont(name: "Arial", size: 16)
+
     }
 
     enum Images {}

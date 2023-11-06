@@ -1,5 +1,5 @@
 //
-//  MainPresenter.swift
+//  JobPresenter.swift
 //  MyJob
 //
 //  Created by Philipp Zeppelin on 30.10.2023.
@@ -18,7 +18,7 @@ protocol MainPresenterProtocol {
     func fetchJobs()
 }
 
-final class MainPresenter: MainPresenterProtocol {
+final class JobPresenter: MainPresenterProtocol {
     weak var view: MainViewProtocol?
     let networkService: NetworkServiceProtocol?
     var router: RouterProtocol?
@@ -36,6 +36,7 @@ final class MainPresenter: MainPresenterProtocol {
         networkService?.fetchJobs(from: url, completion: { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }
+
                 switch result {
                 case .success(let modelApi):
                     self.jobs += modelApi.map { JobsModel($0) }
@@ -46,5 +47,4 @@ final class MainPresenter: MainPresenterProtocol {
             }
         })
     }
-
 }
