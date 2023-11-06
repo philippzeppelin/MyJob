@@ -12,6 +12,7 @@ enum Resources {
 
     enum Colors {
         static let earningsLabelColor = UIColor(hexString: "F7CE17")
+        static let bookButtonColor = UIColor(hexString: "F7CE17")
     }
 
     enum Fonts {

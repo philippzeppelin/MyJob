@@ -13,7 +13,6 @@ final class JobViewController: UIViewController {
     }
 
     var presenter: MainPresenterProtocol?
-    private var jobsCollectionView: UICollectionView?
     private var dataSource: UICollectionViewDiffableDataSource<Section, JobsModel>?
 
     private lazy var collectionView: UICollectionView = {
@@ -28,6 +27,8 @@ final class JobViewController: UIViewController {
         return collectionView
     }()
 
+    private let bookButton = UIButton()
+
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +36,10 @@ final class JobViewController: UIViewController {
         setupAppearence()
         setupDelegates()
         embedView()
-        setupConstraints()
+        setupCollectionViewConstraints()
         configureDataSource()
+        setupBookButton()
+        setupBookButtonConstraints()
     }
 
     private func setupDelegates() {
@@ -85,6 +88,22 @@ final class JobViewController: UIViewController {
             return nil
         }
     }
+
+    private func setupBookButton() {
+        bookButton.backgroundColor = Resources.Colors.bookButtonColor
+        bookButton.layer.cornerRadius = Constants.bookButtonCornerRadius
+        bookButton.setTitle("Забронировать 2 подработки", for: .normal)
+        bookButton.titleLabel?.font = UIFont(name: "Arial Bold", size: 15)
+        bookButton.setTitleColor(.black, for: .normal)
+        bookButton.setTitleColor(.systemGray6, for: .highlighted)
+        bookButton.addTarget(self, action: #selector(bookButtonTapped), for: .touchUpInside)
+        bookButton.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    @objc
+    private func bookButtonTapped() {
+        print("tapped")
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -117,14 +136,24 @@ extension JobViewController {
 private extension JobViewController {
     func embedView() {
         view.addSubview(collectionView)
+        view.addSubview(bookButton)
     }
 
-    func setupConstraints() {
+    func setupCollectionViewConstraints() {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
+    func setupBookButtonConstraints() {
+        NSLayoutConstraint.activate([
+            bookButton.heightAnchor.constraint(equalToConstant: Constants.bookButtonHeight),
+            bookButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: Constants.bookButtonPadding),
+            view.rightAnchor.constraint(equalTo: bookButton.rightAnchor, constant: Constants.bookButtonPadding),
+            view.bottomAnchor.constraint(equalTo: bookButton.bottomAnchor, constant: Constants.bookButtonBottomSpace)
         ])
     }
 }
@@ -134,5 +163,10 @@ extension JobViewController {
     private enum Constants {
         static let cellInsets: CGFloat = 15
         static let cellHeigth: CGFloat = 125
+
+        static let bookButtonHeight: CGFloat = 50
+        static let bookButtonPadding: CGFloat = 30
+        static let bookButtonBottomSpace: CGFloat = 30
+        static let bookButtonCornerRadius: CGFloat = 10
     }
 }
