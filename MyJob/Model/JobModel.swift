@@ -14,6 +14,7 @@ struct JobsModel: Hashable {
     let employer: String
     let salary: Double
     let date: String
+    var isSelected: Bool
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(profession)
@@ -24,7 +25,6 @@ struct JobsModel: Hashable {
         hasher.combine(employer)
     }
 
-    // Check for equality
     static func == (lhs: JobsModel, rhs: JobsModel) -> Bool {
         return lhs.id == rhs.id
     }
@@ -38,5 +38,6 @@ extension JobsModel {
         self.id = jobsApi.id
         self.logo = jobsApi.logo
         self.employer = jobsApi.employer
+        self.isSelected = false
     }
 }

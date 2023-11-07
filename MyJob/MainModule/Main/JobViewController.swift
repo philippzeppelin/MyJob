@@ -7,13 +7,17 @@
 
 import UIKit
 
+private enum Section {
+    case main
+}
+
 final class JobViewController: UIViewController {
-    private enum Section {
-        case main
-    }
 
     var presenter: MainPresenterProtocol?
     private var dataSource: UICollectionViewDiffableDataSource<Section, JobsModel>?
+    private var isSelected = false
+//    private var selectedIndexPath: IndexPath?
+    private var selectedJobs: Set<JobsModel> = []
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout { section, _ in
@@ -29,6 +33,13 @@ final class JobViewController: UIViewController {
 
     private let bookButton = UIButton()
 
+    private let bookButtonBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white.withAlphaComponent(0.95)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +49,7 @@ final class JobViewController: UIViewController {
         embedView()
         setupCollectionViewConstraints()
         configureDataSource()
+        setupBookButtonBackgroundViewConstraints()
         setupBookButton()
         setupBookButtonConstraints()
     }
@@ -90,12 +102,21 @@ final class JobViewController: UIViewController {
     }
 
     private func setupBookButton() {
-        bookButton.backgroundColor = Resources.Colors.bookButtonColor
+        if isSelected {
+            bookButton.backgroundColor = Resources.Colors.bookButtonColor
+            bookButton.setTitle("Забронировать 2 подработки", for: .normal)
+            bookButton.setTitleColor(.black, for: .normal)
+            bookButton.setTitleColor(.systemGray6, for: .highlighted)
+            bookButton.isUserInteractionEnabled = true
+        } else {
+            bookButton.backgroundColor = .gray
+            bookButton.setTitle("Выберите подработки", for: .normal)
+            bookButton.setTitleColor(.black, for: .normal)
+            bookButton.isUserInteractionEnabled = false
+        }
+
         bookButton.layer.cornerRadius = Constants.bookButtonCornerRadius
-        bookButton.setTitle("Забронировать 2 подработки", for: .normal)
         bookButton.titleLabel?.font = UIFont(name: "Arial Bold", size: 15)
-        bookButton.setTitleColor(.black, for: .normal)
-        bookButton.setTitleColor(.systemGray6, for: .highlighted)
         bookButton.addTarget(self, action: #selector(bookButtonTapped), for: .touchUpInside)
         bookButton.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -107,7 +128,42 @@ final class JobViewController: UIViewController {
 }
 
 // MARK: - UICollectionViewDelegate
-extension JobViewController: UICollectionViewDelegate {}
+extension JobViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        if let cell = collectionView.cellForItem(at: indexPath) as? JobCell {
+//            cell.setCellSelected(true)
+//        }
+//        isSelected = true
+//        setupBookButton()
+        if let job = dataSource?.itemIdentifier(for: indexPath) {
+                selectedJobs.insert(job)
+            }
+            updateBookButtonState()
+        collectionView.reloadData()
+
+//        collectionView.reloadData()
+//        setupBookButton()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let job = dataSource?.itemIdentifier(for: indexPath) {
+            selectedJobs.remove(job)
+        }
+        updateBookButtonState()
+        collectionView.reloadData()
+
+    }
+
+    private func updateBookButtonState() {
+        if !selectedJobs.isEmpty {
+            isSelected = true
+            setupBookButton()
+        } else {
+            isSelected = false
+            setupBookButton()
+        }
+    }
+}
 
 // MARK: - MainViewProtocol
 extension JobViewController: MainViewProtocol {
@@ -136,7 +192,8 @@ extension JobViewController {
 private extension JobViewController {
     func embedView() {
         view.addSubview(collectionView)
-        view.addSubview(bookButton)
+        view.addSubview(bookButtonBackgroundView)
+        bookButtonBackgroundView.addSubview(bookButton)
     }
 
     func setupCollectionViewConstraints() {
@@ -147,13 +204,22 @@ private extension JobViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    func setupBookButtonBackgroundViewConstraints() {
+        NSLayoutConstraint.activate([
+            bookButtonBackgroundView.heightAnchor.constraint(equalToConstant: 100),
+            bookButtonBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            bookButtonBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            bookButtonBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
 
     func setupBookButtonConstraints() {
         NSLayoutConstraint.activate([
             bookButton.heightAnchor.constraint(equalToConstant: Constants.bookButtonHeight),
-            bookButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: Constants.bookButtonPadding),
-            view.rightAnchor.constraint(equalTo: bookButton.rightAnchor, constant: Constants.bookButtonPadding),
-            view.bottomAnchor.constraint(equalTo: bookButton.bottomAnchor, constant: Constants.bookButtonBottomSpace)
+            bookButton.leftAnchor.constraint(equalTo: bookButtonBackgroundView.leftAnchor, constant: Constants.bookButtonPadding),
+            bookButtonBackgroundView.rightAnchor.constraint(equalTo: bookButton.rightAnchor, constant: Constants.bookButtonPadding),
+            bookButtonBackgroundView.bottomAnchor.constraint(equalTo: bookButton.bottomAnchor, constant: Constants.bookButtonBottomSpace)
         ])
     }
 }

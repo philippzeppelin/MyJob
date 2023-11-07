@@ -7,8 +7,27 @@
 
 import UIKit
 
+protocol JobCellDelegate: AnyObject {
+    func cellSelectedStateChanged(at indexPath: IndexPath, isSelected: Bool)
+}
+
 final class JobCell: UICollectionViewCell {
     static let cellIdentifier = "JobCell"
+    weak var delegate: JobCellDelegate?
+
+//    override var isSelected: Bool {
+//        didSet {
+//            if isSelected == true {
+//                layer.backgroundColor = UIColor.red.cgColor
+//                layer.borderWidth = 0.3
+//                layer.borderColor = UIColor.yellow.cgColor
+//            } else if isSelected == false {
+//                layer.backgroundColor = UIColor.clear.cgColor
+//                layer.borderWidth = 0
+//                layer.borderColor = UIColor.clear.cgColor
+//            }
+//        }
+//    }
 
     private let topView: UIView = {
         let view = UIView()
@@ -105,7 +124,23 @@ final class JobCell: UICollectionViewCell {
         createDivider()
     }
 
-    func configureCell() {}
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//        setCellSelected(selected)
+//        delegate?.cellSelectedStateChanged(at: indexPath, isSelected: selected)
+//    }
+
+//    func setCellSelected(_ selected: Bool) {
+//        isSelected = selected
+//
+//        if isCellSelected {
+//            layer.borderWidth = 2
+//            layer.borderColor = UIColor.yellow.cgColor
+//        } else {
+//            layer.borderWidth = 0
+//            layer.borderColor = UIColor.clear.cgColor
+//        }
+//    }
 
     private func createDivider() {
         let dividerPath = UIBezierPath()
@@ -126,39 +161,47 @@ extension JobCell {
     struct Configuration {
         let job: JobsModel
         let logoURL: URL?
+//        let indexPath: IndexPath
     }
 
     func configureCell(_ configuration: Configuration) {
-            let job = configuration.job
-            jobNameLabel.text = job.profession
-            earningsLabel.text = "\(Int(job.salary)) ₽"
-            companyNameLabel.text = job.employer
+        let job = configuration.job
+        jobNameLabel.text = job.profession
+        earningsLabel.text = "\(Int(job.salary)) ₽"
+        companyNameLabel.text = job.employer
+        isSelected = job.isSelected
 
-            if let formattedDateAndTime = formatDateTime(job.date) {
-                jobStartingDateLabel.text = formattedDateAndTime.date
-                jobStartingTimeLabel.text = formattedDateAndTime.time
-            } else {
-                jobStartingDateLabel.text = "N/A"
-                jobStartingTimeLabel.text = "N/A"
-            }
-
-            if let logoURL = configuration.logoURL {
-                let task = URLSession.shared.dataTask(with: logoURL) { (data, _, error) in
-                    if let data = data, let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            self.companyLogoImageView.image = image
-                        }
-                    } else {
-                        print("Error loading image: \(error?.localizedDescription ?? "Unknown error")")
-                    }
-                }
-                task.resume()
-            } else {
-                companyLogoImageView.image = UIImage(systemName: "gear")
-            }
+        if let formattedDateAndTime = formatDateTime(job.date) {
+            jobStartingDateLabel.text = formattedDateAndTime.date
+            jobStartingTimeLabel.text = formattedDateAndTime.time
+        } else {
+            jobStartingDateLabel.text = "N/A"
+            jobStartingTimeLabel.text = "N/A"
         }
 
-    func formatDateTime(_ dateTimeString: String) -> (date: String, time: String)? {
+        if let logoURL = configuration.logoURL {
+            let task = URLSession.shared.dataTask(with: logoURL) { (data, _, error) in
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self.companyLogoImageView.image = image
+                    }
+                } else {
+                    print("Error loading image: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }
+            task.resume()
+        } else {
+            companyLogoImageView.image = UIImage(systemName: "gear")
+        }
+
+//        if let selectedIndexPath = selectedIndexPath, configuration.indexPath == selectedIndexPath {
+//            setCellSelected(true)
+//        } else {
+//            setCellSelected(false)
+//        }
+    }
+
+    private func formatDateTime(_ dateTimeString: String) -> (date: String, time: String)? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
 
